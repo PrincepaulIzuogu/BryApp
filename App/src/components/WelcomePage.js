@@ -1,4 +1,4 @@
-// App/src/components/WelcomePage.jsx
+// App/src/components/WelcomePage.js
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/welcomePage.css'; // Import CSS file
