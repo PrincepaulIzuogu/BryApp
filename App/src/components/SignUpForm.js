@@ -1,4 +1,4 @@
-// App/src/components/SignUpForm.jsx
+// App/src/components/SignUpForm.js
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import api from '../api';
