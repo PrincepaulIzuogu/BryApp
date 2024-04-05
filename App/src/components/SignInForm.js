@@ -1,4 +1,4 @@
-// App/src/components/SignInForm.jsx
+// App/src/components/SignInForm.js
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import api from '../api';
