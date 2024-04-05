@@ -1,4 +1,4 @@
-// App/src/components/Dashboard.jsx
+// App/src/components/Dashboard.js
 import React from 'react';
 import '../styles/dashboardStyles.css'; // Import renamed CSS file
 
