@@ -83,3 +83,10 @@ async def signin(signin_request: SignInRequest):
         raise HTTPException(status_code=401, detail="Invalid email or password")
     return {"message": "Sign in successful", "username": db_user.username}
 
+
+if __name__ == "__main__":
+
+    PORT = 8000
+    
+    # Run the FastAPI application using uvicorn
+    uvicorn.run("main:app", host="0.0.0.0", port=PORT, reload=True)
