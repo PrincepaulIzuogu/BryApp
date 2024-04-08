@@ -7,6 +7,9 @@ WORKDIR /app
 # Copy the Python dependencies file to the working directory
 COPY Server/requirements.txt .
 
+# Install build tools and dependencies
+RUN apt-get update && apt-get install -y build-essential
+
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
