@@ -16,7 +16,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Install Node.js and npm
 RUN apt-get update && apt-get install -y curl && \
     curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
-    apt-get install -y nodejs
+    apt-get install -y nodejs npm
 
 # Install Node.js dependencies
 COPY App/package.json App/package-lock.json ./App/
