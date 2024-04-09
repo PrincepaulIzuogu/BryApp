@@ -13,15 +13,6 @@ RUN apt-get update && apt-get install -y build-essential
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Install Docker Compose
-RUN apt-get update && \
-    apt-get install -y curl && \
-    curl -fsSL https://get.docker.com -o get-docker.sh && \
-    sh get-docker.sh && \
-    docker --version && \
-    curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && \
-    chmod +x /usr/local/bin/docker-compose && \
-    docker-compose --version
 
 # Install Node.js and npm
 RUN apt-get update && apt-get install -y curl && \
