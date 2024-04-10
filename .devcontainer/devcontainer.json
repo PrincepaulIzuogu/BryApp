@@ -5,5 +5,5 @@
     "terminal.integrated.shell.linux": "/bin/bash"
   },
   "extensions": ["ms-python.python", "dbaeumer.vscode-eslint"],
-  "postCreateCommand": ""
+  "forwardPorts": [8000]  // Adjust the port number as per your application's requirements
 }
