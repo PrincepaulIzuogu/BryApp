@@ -20,8 +20,9 @@ RUN apt-get update && apt-get install -y curl && \
     apt-get install -y nodejs npm
 
 # Install Node.js dependencies
-COPY App/package.json ./App/
+COPY App/package.json App/package-lock.json ./App/
 RUN cd App && npm install
+
 
 # Copy the entire project directory into the container
 COPY . .
