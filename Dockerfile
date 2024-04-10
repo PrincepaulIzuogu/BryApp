@@ -7,9 +7,8 @@ WORKDIR /app
 # Copy the Python dependencies file to the working directory
 COPY Server/requirements.txt .
 
-# Install wheel
-RUN pip install wheel
-
+# Install build tools and dependencies
+RUN apt-get update && apt-get install -y build-essential
 
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
@@ -31,6 +30,17 @@ RUN apt-get update && apt-get install -y curl && \
 
 # Install Node.js dependencies
 COPY App/package.json App/package-lock.json ./App/
+RUN cd App && npm install
+
+# Copy the entire project directory into the container
+COPY . .
+
+# Expose port 8000 for FastAPI app
+EXPOSE 8000
+
+# Run postCreateCommand
+CMD ["sh", "-c", "source Server/venv/bin/activate && uvicorn main:app --host 0.0.0.0 --port 8000"]
+
 RUN cd App && npm install
 
 # Copy the entire project directory into the container
