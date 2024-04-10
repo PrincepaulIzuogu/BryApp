@@ -2,16 +2,17 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import declarative_base
 from pydantic import BaseModel
 from typing import Optional
-import bcrypt  # Import bcrypt for password hashing
+import bcrypt
+import os
+import uvicorn
 
 # Create a FastAPI instance
 app = FastAPI()
 
-# Set up CORS (Cross-Origin Resource Sharing) middleware
-# This allows the frontend to communicate with the backend from a different origin
+# Set up CORS middleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # Allow requests from any origin (you may want to restrict this in production)
@@ -20,11 +21,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Ensure that the database directory exists
+if not os.path.exists("database"):
+    os.makedirs("database")
+
 # Set up the SQLite database engine
-engine = create_engine('sqlite:///database.db')
+engine = create_engine('sqlite:///database/database.db')
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-# Define your database models
+# Define database models
 Base = declarative_base()
 
 class User(Base):
@@ -33,30 +38,28 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     username = Column(String, index=True)
     email = Column(String, unique=True, index=True)
-    hashed_password = Column(String)  # Change from 'password' to 'hashed_password'
+    hashed_password = Column(String)
 
-# Create the database tables
+# Create database tables
 Base.metadata.create_all(bind=engine)
 
-# Create a Pydantic model for signup
+# Pydantic model for signup
 class UserCreate(BaseModel):
     username: str
     email: str
     password: str
 
-# Create a Pydantic model for signin
+# Pydantic model for signin
 class SignInRequest(BaseModel):
     email: str
     password: str
 
-
-# Define the root endpoint
+# Root endpoint
 @app.get("/")
 async def root():
     return {"message": "Welcome to BryApp"}
 
-
-# Define signup endpoint
+# Signup endpoint
 @app.post("/signup/")
 async def signup(user: UserCreate):
     db = SessionLocal()
@@ -64,7 +67,6 @@ async def signup(user: UserCreate):
     if db_user:
         raise HTTPException(status_code=400, detail="Email already registered")
     
-    # Hash the password before storing it in the database
     hashed_password = bcrypt.hashpw(user.password.encode('utf-8'), bcrypt.gensalt())
     db_user = User(username=user.username, email=user.email, hashed_password=hashed_password.decode('utf-8'))
     db.add(db_user)
@@ -73,7 +75,7 @@ async def signup(user: UserCreate):
     db.close()
     return {"message": "User registered successfully"}
 
-# Define signin endpoint
+# Signin endpoint
 @app.post("/signin/")
 async def signin(signin_request: SignInRequest):
     db = SessionLocal()
