@@ -2,10 +2,10 @@
 FROM alpine:latest
 
 # Set the working directory in the container
-WORKDIR /database
+WORKDIR /app
 
 # Copy the database file into the container
-COPY database/database.db .
+COPY Server/database/database.db .
 
 # Expose the port used by the database
 EXPOSE 5432
