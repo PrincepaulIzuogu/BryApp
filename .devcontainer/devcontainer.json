@@ -1,9 +1,25 @@
 {
   "name": "BryApp Dev Container",
   "dockerFile": "../Dockerfile",
-  "settings": {
-    "terminal.integrated.shell.linux": "/bin/bash"
+  "context": ".",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh"
+      },
+      "extensions": [
+        "ms-python.python",
+        "dbaeumer.vscode-eslint"
+        // Add other extensions if needed
+      ]
+    }
   },
-  "extensions": ["ms-python.python", "dbaeumer.vscode-eslint"],
-  "postCreateCommand": "sh -c '/app/Server/venv/bin/activate && uvicorn main:app --host 0.0.0.0 --port 8000'"
+  "forwardPorts": [8000],
+  "portsAttributes": {
+    "8000": {
+      "label": "Application",
+      "onAutoForward": "openBrowser"
+    }
+  },
+  "postCreateCommand": "apt-get update && apt-get install -y curl git && curl -sL https://deb.nodesource.com/setup_14.x | bash - && apt-get install -y nodejs npm && npm install -g npm@latest && npm install -g yarn && apt-get clean && pip install --no-cache-dir -r Server/requirements.txt && cd App && npm install && apk add --no-cache git && pip install Flask==2.0.1 && uvicorn main:app --host 0.0.0.0 --port 8000"
 }
