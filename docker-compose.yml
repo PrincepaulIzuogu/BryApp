@@ -4,7 +4,7 @@ services:
   frontend:
     build:
       context: .
-      dockerfile: frontend.Dockerfile
+      dockerfile: App/Dockerfile
     ports:
       - "3000:3000"
     volumes:
@@ -13,7 +13,7 @@ services:
   backend:
     build:
       context: .
-      dockerfile: backend.Dockerfile
+      dockerfile: Server/Dockerfile
     ports:
       - "8000:8000"
     volumes:
@@ -22,7 +22,7 @@ services:
   db:
     build:
       context: .
-      dockerfile: database/Dockerfile
+      dockerfile: Server/database/Dockerfile
     ports:
       - "5432:5432"
     volumes:
