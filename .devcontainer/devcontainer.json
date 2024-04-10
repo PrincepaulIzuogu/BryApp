@@ -5,5 +5,6 @@
     "terminal.integrated.shell.linux": "/bin/bash"
   },
   "extensions": ["ms-python.python", "dbaeumer.vscode-eslint"],
-  "forwardPorts": [8000]  // Adjust the port number as per your application's requirements
+  "forwardPorts": [8000],
+  "postCreateCommand": "docker-compose up -d"
 }
