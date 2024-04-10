@@ -38,16 +38,5 @@ COPY . .
 # Expose port 8000 for FastAPI app
 EXPOSE 8000
 
-# Run postCreateCommand
-CMD ["sh", "-c", "source Server/venv/bin/activate && uvicorn main:app --host 0.0.0.0 --port 8000"]
-
-RUN cd App && npm install
-
-# Copy the entire project directory into the container
-COPY . .
-
-# Expose port 8000 for FastAPI app
-EXPOSE 8000
-
-# Run postCreateCommand
+# Run FastAPI app
 CMD ["sh", "-c", "source Server/venv/bin/activate && uvicorn main:app --host 0.0.0.0 --port 8000"]
