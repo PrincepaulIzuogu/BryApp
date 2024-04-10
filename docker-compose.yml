@@ -1,10 +1,29 @@
 version: '3'
 
 services:
-  bryapp:
+  frontend:
     build:
       context: .
+      dockerfile: frontend.Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./App:/app
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend.Dockerfile
     ports:
       - "8000:8000"
     volumes:
-      - .:/app
+      - ./Server:/app
+
+  db:
+    build:
+      context: .
+      dockerfile: database/Dockerfile
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./database:/database
