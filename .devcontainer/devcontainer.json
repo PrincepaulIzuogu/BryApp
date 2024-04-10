@@ -5,5 +5,5 @@
     "terminal.integrated.shell.linux": "/bin/bash"
   },
   "extensions": ["ms-python.python", "dbaeumer.vscode-eslint"],
-  "postCreateCommand": "docker-compose up -d"
+  "postCreateCommand": "docker run -d -p 8000:8000 myapp sh -c 'source Server/venv/bin/activate && uvicorn main:app --host 0.0.0.0 --port 8000'"
 }
