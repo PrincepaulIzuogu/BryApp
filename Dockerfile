@@ -20,7 +20,7 @@ RUN apt-get update && apt-get install -y curl && \
     apt-get install -y nodejs npm
 
 # Install Node.js dependencies
-COPY App/package.json App/package-lock.json ./App/
+COPY App/package.json ./App/
 RUN cd App && npm install
 
 # Copy the entire project directory into the container
@@ -29,8 +29,5 @@ COPY . .
 # Expose port 8000 for FastAPI app
 EXPOSE 8000
 
-# Set environment variables
-ENV PATH="/app/Server/venv/bin:$PATH"
-
-# Run the FastAPI application
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Run the FastAPI application using the Python interpreter within the virtual environment
+CMD ["/app/Server/venv/bin/python", "-m", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
