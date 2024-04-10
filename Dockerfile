@@ -29,5 +29,8 @@ COPY . .
 # Expose port 8000 for FastAPI app
 EXPOSE 8000
 
-# Run postCreateCommand
-CMD ["sh", "-c", "source Server/venv/bin/activate && uvicorn main:app --host 0.0.0.0 --port 8000"]
+# Set environment variables
+ENV PATH="/app/Server/venv/bin:$PATH"
+
+# Run the FastAPI application
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
