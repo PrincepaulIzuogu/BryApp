@@ -1,29 +1,32 @@
+# docker-compose.yml
+
 version: '3'
 
 services:
-  frontend:
-    build:
-      context: .
-      dockerfile: App/Dockerfile
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./App:/app
-
   backend:
     build:
-      context: .
-      dockerfile: Server/Dockerfile
+      context: Server
+      dockerfile: Dockerfile
     ports:
       - "8000:8000"
     volumes:
       - ./Server:/app
 
-  db:
+  frontend:
     build:
-      context: .
-      dockerfile: Server/database/Dockerfile
+      context: App
+      dockerfile: Dockerfile
     ports:
-      - "5432:5432"
+      - "3000:3000"
     volumes:
-      - ./database:/database
+      - ./App:/app
+
+  database:
+    build:
+      context: Server/database
+      dockerfile: Dockerfile
+    volumes:
+      - database_data:/database
+
+volumes:
+  database_data:
