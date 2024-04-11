@@ -1,7 +1,7 @@
 {
   "name": "BryApp Dev Container",
   "dockerComposeFile": ["../docker-compose.yml"],
-  "service": "frontend", // Set the default service to start
+  "service": "backend", // Set the default service to start
   "workspaceFolder": "/app",
   "extensions": ["ms-python.python", "dbaeumer.vscode-eslint"],
   "settings": {
