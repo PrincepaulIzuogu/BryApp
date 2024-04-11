@@ -8,7 +8,7 @@ WORKDIR /database
 RUN apk add --no-cache sqlite
 
 # Copy the database file into the container
-COPY database.db .
+COPY Server/database/database.db .
 
 # Expose the port used by the database
 EXPOSE 5432
