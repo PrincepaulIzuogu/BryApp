@@ -2,7 +2,7 @@
 FROM alpine:latest
 
 # Set the working directory in the container
-WORKDIR /app
+WORKDIR /database
 
 # Install SQLite
 RUN apk add --no-cache sqlite
