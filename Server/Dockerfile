@@ -16,6 +16,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Install uvicorn
 RUN pip install uvicorn
 
+
 # Copy the entire project directory into the container
 COPY . .
 
