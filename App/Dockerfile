@@ -9,7 +9,9 @@ COPY App/package.json App/package-lock.json ./
 
 
 # Install dependencies
-RUN npm install -g npm@latest
+RUN npm install -g npm@latest \
+    && npm install react-scripts
+
 
 # Copy the rest of the application files
 COPY . .
