@@ -1,11 +1,13 @@
 {
-  "name": "BryApp Dev Container",
-  "dockerComposeFile": ["../docker-compose.yml"],
-  "service": "frontend", // Set the default service to start
-  "workspaceFolder": "/app",
-  "extensions": ["ms-python.python", "dbaeumer.vscode-eslint"],
+  "name": "Node.js and Python",
+  "dockerComposeFile": ["docker-compose.yml"],
+  "service": "frontend", // Change this to "backend" if needed
+  "extensions": [
+    "dbaeumer.vscode-eslint"
+  ],
   "settings": {
     "terminal.integrated.shell.linux": "/bin/bash"
   },
-  "postCreateCommand": "docker-compose up -d"
+  "forwardPorts": [3000, 8000], // Adjust as needed
+  "postCreateCommand": "npm install && npm run build"
 }
