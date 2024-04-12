@@ -9,7 +9,7 @@ COPY App/package.json App/package-lock.json ./
 
 
 # Install dependencies
-RUN npm install
+RUN npm install -g npm@latest
 
 # Copy the rest of the application files
 COPY . .
