@@ -1,6 +1,6 @@
 {
-  "name": "Node.js and Python",
-  "dockerComposeFile": ["docker-compose.yml"],
+  "name": "BryApp",
+  "dockerComposeFile": ["../docker-compose.yml"],
   "service": "frontend", // Change this to "backend" if needed
   "extensions": [
     "dbaeumer.vscode-eslint"
