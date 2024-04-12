@@ -2,28 +2,12 @@ version: '3'
 
 services:
   frontend:
-    build:
-      context: .
-      dockerfile: App/Dockerfile
+    build: ./App
     ports:
       - "3000:3000"
-    volumes:
-      - ./App:/app
-
   backend:
-    build:
-      context: .
-      dockerfile: Server/Dockerfile
+    build: ./Server
     ports:
       - "8000:8000"
-    volumes:
-      - ./Server:/app
-
-  db:
-    build:
-      context: .
-      dockerfile: Server/database/Dockerfile
-    volumes:
-      - ./database:/database
-
-
+  database:
+    build: ./Server/database
